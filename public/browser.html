@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>jQuery File Tree Demo</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/jqueryFileTree.js" type="text/javascript"></script>
+    <link href="/css/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <script type="text/javascript">
+      $(document).ready( function() {
+        $('#fileTree').fileTree({
+          root: '',
+          script: '/trees',
+          expandSpeed: -1,
+          collapseSpeed: -1
+        });
+      });
+    </script>
+
+  </head>
+  
+  <body>
+    <div id="fileTree" class="demo"></div>
+  </body>  
+</html>
