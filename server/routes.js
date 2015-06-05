@@ -4,12 +4,15 @@ var express = require('express'),
 var fs = require('fs'),
     path = require('path');
 
+var rootDir = process.cwd(),
+    rootDirLength = rootDir.length;
+
 router.get('/', function(req, res) {
   res.render('index');
 });
 
-router.post('/trees', function(req, res) {
-  var dir = req.body.dir.trim() ? req.body.dir : process.cwd() + '/';
+router.post('*', function(req, res) {
+  var dir = req.body.dir.trim() ? rootDir + req.body.dir : rootDir + '/';
 
   var html = ['<ul class="jqueryFileTree" style="display: none;">'];
 
@@ -21,18 +24,19 @@ router.post('/trees', function(req, res) {
 
     files.forEach(function (file) {
       var path = dir + file,
+          altPath = dir.slice(rootDirLength) + file,
           stat = fs.statSync(path);
 
       if (stat.isDirectory()) { 
         dirHtml = dirHtml.concat([
           '<li class="directory collapsed">',
-          '<a href="#" rel="', path, '/">', file, '</a>',
+          '<a href="#" rel="', altPath, '/">', file, '</a>',
           '</li>'
         ]);
       } else {
         fileHtml = fileHtml.concat([
           '<li class="file ext_', file.split('.')[1], '">',
-          '<a target="main" href="/files?path=', path, '">', file, '</a>',
+          '<a target="main" href="', altPath, '">', file, '</a>',
           '</li>'
         ]);
       }
@@ -47,8 +51,10 @@ router.post('/trees', function(req, res) {
   res.send(html.join(''));
 });
 
-router.get('/files', function(req, res) {
-  res.sendFile(req.query.path);
+router.get('*', function(req, res) {
+  fullPath = rootDir + req.path;
+  console.log(fullPath);
+  res.sendFile(fullPath);
 });
 
 module.exports = router;

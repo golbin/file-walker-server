@@ -1,6 +1,6 @@
 {
   "name": "file-walker-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An Web Based File Browser especially for web publishers.",
   "bin": {
     "file-walker-server": "./server/index.js"

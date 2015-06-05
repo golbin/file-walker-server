@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/file-walker-server-static', express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes);
 
